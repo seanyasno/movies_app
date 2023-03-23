@@ -8,8 +8,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AppRegistry } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 
-import App from './App';
 import { name as appName } from './app.json';
+import { CustomAppbar } from './src/components';
+import { TempScreen } from './src/screens';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -18,14 +19,14 @@ const Main = () => {
         <PaperProvider>
             <NavigationContainer>
                 <Navigator
-                    initialRouteName={'App'}
-                    // screenOptions={{
-                    //     // header: (props) => (
-                    //     //     <CustomAppbar title={props.route.name} />
-                    //     // ),
-                    // }}
+                    initialRouteName={'Temp'}
+                    screenOptions={{
+                        header: (props) => (
+                            <CustomAppbar title={props.route.name} />
+                        ),
+                    }}
                 >
-                    <Screen name={'App'} component={App} />
+                    <Screen name={'Temp'} component={TempScreen} />
                 </Navigator>
             </NavigationContainer>
         </PaperProvider>
