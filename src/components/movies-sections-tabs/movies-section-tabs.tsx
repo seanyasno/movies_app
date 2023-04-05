@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Animated, I18nManager, useWindowDimensions, View } from 'react-native';
+import { Animated, I18nManager, useWindowDimensions } from 'react-native';
 import { Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
 import {
@@ -10,32 +10,16 @@ import {
     TabView,
 } from 'react-native-tab-view';
 
-import { MovieCardCarousel } from '../';
-import {
-    useLatestMovies,
-    usePopularMovies,
-    useTrendingMovies,
-} from '../../hooks';
 import '../../hooks';
+import {
+    MemoizedLatestMoviesSection,
+    MemoizedPopularMoviesSection,
+    MemoizedTrendingMoviesSection,
+} from './sections';
 
 export const MoviesSectionTabs: React.FC = () => {
     const { width } = useWindowDimensions();
     const [currentTab, setCurrentTab] = useState(0);
-
-    const { data: trendingMovies, isLoading: trendingMoviesLoading } =
-        useTrendingMovies();
-    const { data: latestMovies, isLoading: latestMoviesLoading } =
-        useLatestMovies();
-    const { data: popularMovies, isLoading: popularMoviesLoading } =
-        usePopularMovies();
-
-    if (trendingMoviesLoading || latestMoviesLoading || popularMoviesLoading) {
-        return (
-            <View>
-                <Text>Loading...</Text>
-            </View>
-        );
-    }
 
     return (
         <TabView
@@ -57,9 +41,9 @@ export const MoviesSectionTabs: React.FC = () => {
                 ],
             }}
             renderScene={SceneMap({
-                trending: () => <MovieCardCarousel movies={trendingMovies} />,
-                latest: () => <MovieCardCarousel movies={latestMovies} />,
-                popular: () => <MovieCardCarousel movies={popularMovies} />,
+                trending: MemoizedTrendingMoviesSection,
+                latest: MemoizedLatestMoviesSection,
+                popular: MemoizedPopularMoviesSection,
             })}
             renderTabBar={(props) => <CustomTabBar {...props} />}
             onIndexChange={(index) => setCurrentTab(index)}
