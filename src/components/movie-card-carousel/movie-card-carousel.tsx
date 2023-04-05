@@ -5,7 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { interpolate } from 'react-native-reanimated';
 import Carousel from 'react-native-reanimated-carousel';
 import { TAnimationStyle } from 'react-native-reanimated-carousel/lib/typescript/layouts/BaseLayout';
-import { s, scale } from 'react-native-size-matters';
+import { s } from 'react-native-size-matters';
 
 import { MovieCard } from '../movie-card/movie-card';
 
