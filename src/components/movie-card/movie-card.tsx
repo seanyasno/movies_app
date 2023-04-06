@@ -25,6 +25,12 @@ export const MovieCard: React.FC<Props> = (props) => {
     } = props;
     const imagePath = `https://image.tmdb.org/t/p/original${posterPath}`;
 
+    const dateFormat = Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
+
     return (
         <View
             style={{
@@ -55,14 +61,25 @@ export const MovieCard: React.FC<Props> = (props) => {
                 />
             </View>
             <Text
-                variant={'titleLarge'}
                 style={{
                     fontWeight: 'bold',
                     marginTop: s(20),
-                    marginBottom: s(20),
+                    fontSize: s(16),
+                    textAlign: 'center',
                 }}
             >
                 {title}
+            </Text>
+
+            <Text
+                style={{
+                    color: '#25365047',
+                    fontSize: s(12),
+                    marginTop: s(5),
+                    marginBottom: s(20),
+                }}
+            >
+                {dateFormat.format(new Date(releaseDate))}
             </Text>
 
             <CircularProgress
@@ -74,14 +91,14 @@ export const MovieCard: React.FC<Props> = (props) => {
                 progressValueColor={'#253650'}
                 valueSuffix={'%'}
                 valueSuffixStyle={{
-                    fontSize: s(11),
+                    fontSize: s(8),
                     alignSelf: 'flex-start',
                     paddingTop: s(2),
                 }}
-                progressValueFontSize={s(20)}
-                radius={s(30)}
-                activeStrokeWidth={s(5)}
-                inActiveStrokeWidth={s(5)}
+                progressValueFontSize={s(16)}
+                radius={s(22)}
+                activeStrokeWidth={s(3)}
+                inActiveStrokeWidth={s(3)}
             />
         </View>
     );

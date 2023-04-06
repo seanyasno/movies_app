@@ -13,7 +13,11 @@ export const HomeScreen: React.FC = () => {
 
     return (
         <>
-            <Appbar.Header>
+            <Appbar.Header
+                style={{
+                    backgroundColor: '#fff',
+                }}
+            >
                 <Appbar.Action icon={'menu'} onPress={() => {}} />
                 <Appbar.Content title={''} />
                 <Appbar.Action icon={'magnify'} onPress={() => {}} />
@@ -21,13 +25,14 @@ export const HomeScreen: React.FC = () => {
             <View
                 style={{
                     alignItems: 'center',
-                    backgroundColor: colors.background,
+                    backgroundColor: '#fff',
                 }}
             >
                 <Text
                     style={{
                         fontSize: s(26),
                         paddingHorizontal: s(10),
+                        marginBottom: s(14),
                     }}
                 >
                     {title}

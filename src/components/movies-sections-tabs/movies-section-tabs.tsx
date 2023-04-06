@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { useWindowDimensions } from 'react-native';
+import { s } from 'react-native-size-matters';
 import { SceneMap, TabView } from 'react-native-tab-view';
 
 import '../../hooks';
@@ -49,6 +50,9 @@ export const MoviesSectionTabs: React.FC = () => {
             swipeEnabled={false}
             style={{
                 backgroundColor: '#fff',
+            }}
+            pagerStyle={{
+                marginTop: s(10),
             }}
         />
     );

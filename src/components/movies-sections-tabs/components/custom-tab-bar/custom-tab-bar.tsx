@@ -26,10 +26,11 @@ export const CustomTabBar: React.FC<
                     key={route.key}
                     style={{
                         color: focused ? '#253650' : '#25365047',
-                        fontWeight: focused ? 'bold' : 'normal',
-                        fontSize: s(16),
-                        flex: 1,
+                        fontWeight: focused ? '500' : 'normal',
+                        fontSize: s(14),
                         padding: 4,
+                        textAlign: 'center',
+                        width: '100%',
                     }}
                 >
                     {route.title}

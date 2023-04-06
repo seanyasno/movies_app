@@ -17,8 +17,8 @@ export const MovieCardCarousel: React.FC<Props> = (props) => {
     const { movies } = props;
     const { width } = useWindowDimensions();
 
-    const itemWidth = s(200);
-    const itemHeight = s(288);
+    const itemWidth = s(180);
+    const itemHeight = s(260);
     const centerOffset = width / 2 - itemWidth / 2;
 
     const animationStyle: TAnimationStyle = React.useCallback(
