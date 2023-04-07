@@ -52,6 +52,7 @@ export const MovieCardCarousel: React.FC<Props> = (props) => {
             <Carousel
                 data={
                     movies as {
+                        id: number;
                         title: string;
                         release_date: string;
                         poster_path: string;
@@ -61,6 +62,7 @@ export const MovieCardCarousel: React.FC<Props> = (props) => {
                 renderItem={({ item }) => {
                     return (
                         <MovieCard
+                            id={item.id}
                             title={item.title}
                             releaseDate={item.release_date}
                             posterPath={item.poster_path}

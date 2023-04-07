@@ -1,11 +1,16 @@
 import React from 'react';
 
-import { Image, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Image, TouchableOpacity, View } from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
 
+import { RootStackParamList } from '../../types';
+
 type Props = {
+    id: number;
     title: string;
     releaseDate: string;
     posterPath: string;
@@ -16,6 +21,7 @@ type Props = {
 
 export const MovieCard: React.FC<Props> = (props) => {
     const {
+        id,
         title,
         releaseDate,
         posterPath,
@@ -24,6 +30,8 @@ export const MovieCard: React.FC<Props> = (props) => {
         height = 100,
     } = props;
     const imagePath = `https://image.tmdb.org/t/p/original${posterPath}`;
+    const navigation =
+        useNavigation<NativeStackNavigationProp<RootStackParamList, 'Home'>>();
 
     const dateFormat = Intl.DateTimeFormat('en-US', {
         year: 'numeric',
@@ -37,29 +45,38 @@ export const MovieCard: React.FC<Props> = (props) => {
                 alignItems: 'center',
             }}
         >
-            <View
-                style={{
-                    shadowColor: '#000',
-                    shadowOffset: { width: 0, height: 2 },
-                    shadowOpacity: 0.8,
-                    shadowRadius: 2,
-                    elevation: 5,
-                    backgroundColor: 'white',
-                    borderRadius: 36,
-                }}
+            <TouchableOpacity
+                onPress={() =>
+                    navigation.navigate('MovieDetails', {
+                        movieId: id,
+                    })
+                }
             >
-                <Image
-                    source={{
-                        uri: imagePath,
-                        width: width,
-                        height: height,
-                    }}
-                    resizeMode={'cover'}
+                <View
                     style={{
+                        shadowColor: '#000',
+                        shadowOffset: { width: 0, height: 2 },
+                        shadowOpacity: 0.8,
+                        shadowRadius: 2,
+                        elevation: 5,
+                        backgroundColor: 'white',
                         borderRadius: 36,
                     }}
-                />
-            </View>
+                >
+                    <Image
+                        source={{
+                            uri: imagePath,
+                            width: width,
+                            height: height,
+                        }}
+                        resizeMode={'cover'}
+                        style={{
+                            borderRadius: 36,
+                        }}
+                    />
+                </View>
+            </TouchableOpacity>
+
             <Text
                 style={{
                     fontWeight: 'bold',

@@ -505,6 +505,8 @@
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-movies_app-movies_appTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5PP2FS9CB5;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -524,6 +526,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.seanyasno.movies-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movies_app.app/movies_app";
 			};
 			name = Debug;
@@ -533,6 +536,8 @@
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-movies_app-movies_appTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 5PP2FS9CB5;
 				INFOPLIST_FILE = movies_appTests/Info.plist;
@@ -549,6 +554,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.seanyasno.movies-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movies_app.app/movies_app";
 			};
 			name = Release;
@@ -560,9 +566,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5PP2FS9CB5;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5PP2FS9CB5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = movies_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -578,6 +586,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.seanyasno.movies-app";
 				PRODUCT_NAME = movies_app;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Seansi;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -591,9 +600,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5PP2FS9CB5;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5PP2FS9CB5;
 				INFOPLIST_FILE = movies_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -608,6 +619,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.seanyasno.movies-app";
 				PRODUCT_NAME = movies_app;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Seansi;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
