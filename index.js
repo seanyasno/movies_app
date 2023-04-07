@@ -15,7 +15,11 @@ const client = new QueryClient();
 
 const Main = () => {
     return (
-        <PaperProvider>
+        <PaperProvider
+            theme={{
+                dark: false,
+            }}
+        >
             <QueryClientProvider client={client}>
                 <NavigationContainer>
                     <RootNavigator />

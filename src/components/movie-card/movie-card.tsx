@@ -3,11 +3,11 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Image, TouchableOpacity, View } from 'react-native';
-import CircularProgress from 'react-native-circular-progress-indicator';
 import { Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
 
 import { RootStackParamList } from '../../types';
+import { UserRatingBar } from '../user-rating-bar/user-rating-bar';
 
 type Props = {
     id: number;
@@ -99,24 +99,7 @@ export const MovieCard: React.FC<Props> = (props) => {
                 {dateFormat.format(new Date(releaseDate))}
             </Text>
 
-            <CircularProgress
-                value={vote_average * 10}
-                maxValue={100}
-                activeStrokeColor={'#1BB3E0'}
-                activeStrokeSecondaryColor={'#16D1AE'}
-                inActiveStrokeColor={'#ECECEC'}
-                progressValueColor={'#253650'}
-                valueSuffix={'%'}
-                valueSuffixStyle={{
-                    fontSize: s(8),
-                    alignSelf: 'flex-start',
-                    paddingTop: s(2),
-                }}
-                progressValueFontSize={s(16)}
-                radius={s(22)}
-                activeStrokeWidth={s(3)}
-                inActiveStrokeWidth={s(3)}
-            />
+            <UserRatingBar value={vote_average * 10} />
         </View>
     );
 };

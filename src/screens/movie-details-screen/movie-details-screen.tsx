@@ -11,11 +11,11 @@ import {
     useWindowDimensions,
     View,
 } from 'react-native';
-import CircularProgress from 'react-native-circular-progress-indicator';
 import { Appbar, Button, Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import { UserRatingBar } from '../../components';
 import { MovieDetailsStackNavigationProp } from '../../types';
 import { tmdbClient } from '../../utils';
 
@@ -86,7 +86,7 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
                         color={'#ffffff'}
                         style={{
                             position: 'absolute',
-                            top: s(30),
+                            top: s(44),
                             backgroundColor: '#ffffff15',
                             borderRadius: s(10),
                             marginLeft: s(10),
@@ -113,24 +113,8 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
                             elevation: 5,
                         }}
                     >
-                        <CircularProgress
-                            value={movieDetails.vote_average * 10}
-                            maxValue={100}
-                            activeStrokeColor={'#1BB3E0'}
-                            activeStrokeSecondaryColor={'#16D1AE'}
-                            inActiveStrokeColor={'#ECECEC'}
-                            progressValueColor={'#253650'}
-                            valueSuffix={'%'}
-                            valueSuffixStyle={{
-                                fontSize: s(8),
-                                alignSelf: 'flex-start',
-                                paddingTop: s(2),
-                            }}
-                            progressValueFontSize={s(16)}
-                            radius={s(22)}
-                            activeStrokeWidth={s(3)}
-                            inActiveStrokeWidth={s(3)}
-                        />
+                        <UserRatingBar value={movieDetails.vote_average * 10} />
+
                         <Text
                             style={{
                                 color: '#25365061',
