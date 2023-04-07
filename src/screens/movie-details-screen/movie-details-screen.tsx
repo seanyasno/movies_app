@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useQuery } from '@tanstack/react-query';
+import { isEmpty } from 'lodash';
 import {
     Image,
     SafeAreaView,
@@ -14,6 +16,7 @@ import { s } from 'react-native-size-matters';
 
 import { useMovieDetails, useMovieTrailers } from '../../hooks';
 import { MovieDetailsStackNavigationProp } from '../../types';
+import { tmdbClient } from '../../utils';
 import { ElevatingSection } from './components';
 
 export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
@@ -33,7 +36,17 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
         }
     );
 
-    if (isLoading || loadingTrailer) {
+    const { data: cast, isLoading: isLoadingCast } = useQuery({
+        queryKey: ['movie-credits', props.route.params?.movieId],
+        queryFn: async () => {
+            const url = `/movie/${props.route.params?.movieId}/credits`;
+            const response = await tmdbClient.get(url);
+            return response.data.cast;
+        },
+        enabled: isSuccess,
+    });
+
+    if (isLoading || loadingTrailer || isLoadingCast) {
         return (
             <SafeAreaView>
                 <Text>Loading...</Text>
@@ -111,6 +124,74 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
                     <Text style={styles.overviewContent}>
                         {movieDetails.overview}
                     </Text>
+
+                    <Text style={styles.overviewTitle}>Series Cast</Text>
+
+                    <ScrollView
+                        horizontal
+                        style={{
+                            columnGap: s(10),
+                        }}
+                    >
+                        {cast.map(({ name, id, profile_path, character }) => (
+                            <View
+                                key={id}
+                                style={{
+                                    alignItems: 'center',
+                                    marginRight: s(10),
+                                    rowGap: s(5),
+                                    display: isEmpty(profile_path)
+                                        ? 'none'
+                                        : 'flex',
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        elevation: 10,
+                                        borderRadius: s(50),
+                                        shadowColor: '#000',
+                                        shadowOffset: {
+                                            width: 0,
+                                            height: 2,
+                                        },
+                                        shadowOpacity: 0.25,
+                                        shadowRadius: 3.84,
+                                    }}
+                                >
+                                    <Image
+                                        source={{
+                                            uri: `https://image.tmdb.org/t/p/original${profile_path}`,
+                                            width: s(70),
+                                            height: s(70),
+                                        }}
+                                        style={{
+                                            borderRadius: s(50),
+                                        }}
+                                    />
+                                </View>
+                                <Text
+                                    style={{
+                                        color: '#253650',
+                                        maxWidth: s(80),
+                                        textAlign: 'center',
+                                        fontWeight: 'bold',
+                                    }}
+                                >
+                                    {name}
+                                </Text>
+                                <Text
+                                    style={{
+                                        color: '#25365047',
+                                        maxWidth: s(80),
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    {character}
+                                </Text>
+                            </View>
+                        ))}
+                    </ScrollView>
+                    {/*</View>*/}
                 </View>
             </ScrollView>
         </>
