@@ -14,3 +14,13 @@ export const getPopularMovies = async () => {
     const urlPath = '/movie/popular';
     return tmdbClient.get(urlPath);
 };
+
+export const getMovieDetails = async (movieId: number) => {
+    const urlPath = `/movie/${movieId}`;
+    return tmdbClient.get(urlPath);
+};
+
+export const getMovieTrailers = async (movieId: number) => {
+    const urlPath = `/movie/${movieId}/videos`;
+    return tmdbClient.get(urlPath);
+};

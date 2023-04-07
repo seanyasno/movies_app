@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { useQuery } from '@tanstack/react-query';
 import {
     Image,
     Linking,
@@ -16,8 +15,8 @@ import { s } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { UserRatingBar } from '../../components';
+import { useMovieDetails, useMovieTrailers } from '../../hooks';
 import { MovieDetailsStackNavigationProp } from '../../types';
-import { tmdbClient } from '../../utils';
 
 export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
     props
@@ -27,26 +26,14 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
         data: movieDetails,
         isLoading,
         isSuccess,
-    } = useQuery({
-        queryKey: ['movie', props.route.params?.movieId],
-        queryFn: async () => {
-            const response = await tmdbClient.get(
-                `/movie/${props.route.params?.movieId}`
-            );
-            return response.data;
-        },
-    });
+    } = useMovieDetails(props.route.params?.movieId);
 
-    const { data: trailers, isLoading: loadingTrailer } = useQuery({
-        queryKey: ['movie-trailer', props.route.params?.movieId],
-        queryFn: async () => {
-            const response = await tmdbClient.get(
-                `/movie/${props.route.params?.movieId}/videos`
-            );
-            return response.data.results;
-        },
-        enabled: isSuccess,
-    });
+    const { data: trailers, isLoading: loadingTrailer } = useMovieTrailers(
+        props.route.params?.movieId,
+        {
+            enabled: isSuccess,
+        }
+    );
 
     if (isLoading || loadingTrailer) {
         return (
