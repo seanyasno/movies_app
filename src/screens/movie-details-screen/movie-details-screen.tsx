@@ -2,21 +2,19 @@ import React from 'react';
 
 import {
     Image,
-    Linking,
     SafeAreaView,
     ScrollView,
     StatusBar,
-    TouchableOpacity,
+    StyleSheet,
     useWindowDimensions,
     View,
 } from 'react-native';
-import { Appbar, Button, Text } from 'react-native-paper';
+import { Appbar, Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
-import Icon from 'react-native-vector-icons/Ionicons';
 
-import { UserRatingBar } from '../../components';
 import { useMovieDetails, useMovieTrailers } from '../../hooks';
 import { MovieDetailsStackNavigationProp } from '../../types';
+import { ElevatingSection } from './components';
 
 export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
     props
@@ -45,9 +43,7 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
 
     const imagePath = `https://image.tmdb.org/t/p/original${movieDetails.poster_path}`;
 
-    const trailer = trailers?.find(
-        (trailer) => trailer.type === 'Trailer'
-    )?.key;
+    const trailer = trailers?.find(({ type }) => type === 'Trailer')?.key;
     const trailerUrl = `https://www.youtube.com/watch?v=${trailer}`;
 
     return (
@@ -64,78 +60,20 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
                         }}
                         resizeMode={'cover'}
                         style={{
-                            borderBottomLeftRadius: s(20),
-                            borderBottomRightRadius: s(20),
+                            borderBottomLeftRadius: s(30),
+                            borderBottomRightRadius: s(30),
                         }}
                     />
                     <Appbar.BackAction
                         onPress={() => props.navigation.goBack()}
                         color={'#ffffff'}
-                        style={{
-                            position: 'absolute',
-                            top: s(44),
-                            backgroundColor: '#ffffff15',
-                            borderRadius: s(10),
-                            marginLeft: s(10),
-                        }}
+                        style={styles.back}
                     />
 
-                    <View
-                        style={{
-                            position: 'absolute',
-                            top: width * (4 / 3) - s(45),
-                            right: 0,
-                            height: s(90),
-                            backgroundColor: '#fff',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            paddingHorizontal: s(25),
-                            borderTopLeftRadius: s(200),
-                            borderBottomLeftRadius: s(200),
-                            columnGap: s(14),
-                            shadowColor: '#00000040',
-                            shadowOffset: { width: 0, height: 2 },
-                            shadowOpacity: 0.8,
-                            shadowRadius: 10,
-                            elevation: 5,
-                        }}
-                    >
-                        <UserRatingBar value={movieDetails.vote_average * 10} />
-
-                        <Text
-                            style={{
-                                color: '#25365061',
-                                width: s(36),
-                                textAlign: 'center',
-                                fontSize: s(12),
-                            }}
-                        >
-                            User Score
-                        </Text>
-
-                        <TouchableOpacity
-                            onPress={() => Linking.openURL(trailerUrl)}
-                        >
-                            <View
-                                style={{
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                <Icon name={'play-outline'} size={s(20)} />
-                                <Button
-                                    color={'#253650'}
-                                    textColor={'#253650'}
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    Play Trailer
-                                </Button>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
+                    <ElevatingSection
+                        voteAverage={movieDetails.vote_average}
+                        trailerUrl={trailerUrl}
+                    />
                 </View>
 
                 <View
@@ -144,15 +82,7 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
                         marginTop: s(70),
                     }}
                 >
-                    <Text
-                        style={{
-                            color: '#253650',
-                            fontSize: s(18),
-                            fontWeight: 'bold',
-                        }}
-                    >
-                        {movieDetails.title}
-                    </Text>
+                    <Text style={styles.movieTitle}>{movieDetails.title}</Text>
 
                     <View
                         style={{
@@ -177,23 +107,8 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
                         ))}
                     </View>
 
-                    <Text
-                        style={{
-                            color: '#253650',
-                            fontSize: s(14),
-                            fontWeight: 'bold',
-                            marginTop: s(24),
-                            marginBottom: s(14),
-                        }}
-                    >
-                        Overview
-                    </Text>
-                    <Text
-                        style={{
-                            fontSize: s(12),
-                            lineHeight: s(24),
-                        }}
-                    >
+                    <Text style={styles.overviewTitle}>Overview</Text>
+                    <Text style={styles.overviewContent}>
                         {movieDetails.overview}
                     </Text>
                 </View>
@@ -201,3 +116,25 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
         </>
     );
 };
+
+const styles = StyleSheet.create({
+    back: {
+        position: 'absolute',
+        top: s(44),
+        backgroundColor: '#ffffff15',
+        borderRadius: s(10),
+        marginLeft: s(10),
+    },
+    movieTitle: { color: '#253650', fontSize: s(18), fontWeight: 'bold' },
+    overviewTitle: {
+        color: '#253650',
+        fontSize: s(14),
+        fontWeight: 'bold',
+        marginTop: s(24),
+        marginBottom: s(14),
+    },
+    overviewContent: {
+        fontSize: s(12),
+        lineHeight: s(24),
+    },
+});
