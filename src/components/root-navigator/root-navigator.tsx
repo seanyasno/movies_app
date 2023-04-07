@@ -17,7 +17,13 @@ export const RootNavigator = () => {
                     headerShown: false,
                 }}
             />
-            <Screen name={'MovieDetails'} component={MovieDetailsScreen} />
+            <Screen
+                name={'MovieDetails'}
+                component={MovieDetailsScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
         </Navigator>
     );
 };
