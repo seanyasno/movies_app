@@ -5,6 +5,7 @@ export type RootStackParamList = {
     MovieDetails?: {
         movieId: number;
     };
+    Search: undefined;
 };
 
 export type HomeStackNavigationProp = NativeStackScreenProps<

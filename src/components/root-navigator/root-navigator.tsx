@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { HomeScreen, MovieDetailsScreen } from '../../screens';
+import { HomeScreen, MovieDetailsScreen, SearchScreen } from '../../screens';
 import { RootStackParamList } from '../../types';
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
@@ -20,6 +20,13 @@ export const RootNavigator = () => {
             <Screen
                 name={'MovieDetails'}
                 component={MovieDetailsScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Screen
+                name={'Search'}
+                component={SearchScreen}
                 options={{
                     headerShown: false,
                 }}
