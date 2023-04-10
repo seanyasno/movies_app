@@ -38,6 +38,32 @@ export const SearchScreen: React.FC = () => {
         return <Text>Loading...</Text>;
     }
 
+    const mappedTrendingMovies = trendingMovies.map(
+        ({ id, poster_path, title, release_date }) => ({
+            id,
+            imageUri: `https://image.tmdb.org/t/p/original${poster_path}`,
+            title,
+            description: dateFormat.format(new Date(release_date)),
+        })
+    );
+
+    const mappedTrendingTVShows = trendingTVShows.map(
+        ({ id, poster_path, name, first_air_date }) => ({
+            id,
+            imageUri: `https://image.tmdb.org/t/p/original${poster_path}`,
+            title: name,
+            description: dateFormat.format(new Date(first_air_date)),
+        })
+    );
+
+    const mappedTrendingPeople = trendingPeople.map(
+        ({ id, profile_path, name }) => ({
+            id,
+            imageUri: `https://image.tmdb.org/t/p/original${profile_path}`,
+            title: name,
+        })
+    );
+
     return (
         <>
             <Appbar.Header
@@ -69,42 +95,14 @@ export const SearchScreen: React.FC = () => {
                         rowGap: s(20),
                     }}
                 >
-                    <SectionList
-                        data={trendingMovies.map((movie) => ({
-                            id: movie.id,
-                            imageUri: `https://image.tmdb.org/t/p/original${movie.poster_path}`,
-                            title: movie.title,
-                            description: dateFormat.format(
-                                new Date(movie.release_date)
-                            ),
-                        }))}
-                        title={'Movies'}
-                    />
+                    <SectionList data={mappedTrendingMovies} title={'Movies'} />
 
                     <SectionList
-                        data={trendingTVShows.map(
-                            ({ id, poster_path, name, first_air_date }) => ({
-                                id,
-                                imageUri: `https://image.tmdb.org/t/p/original${poster_path}`,
-                                title: name,
-                                description: dateFormat.format(
-                                    new Date(first_air_date)
-                                ),
-                            })
-                        )}
+                        data={mappedTrendingTVShows}
                         title={'TV Shows'}
                     />
 
-                    <SectionList
-                        data={trendingPeople.map(
-                            ({ id, profile_path, name }) => ({
-                                id,
-                                imageUri: `https://image.tmdb.org/t/p/original${profile_path}`,
-                                title: name,
-                            })
-                        )}
-                        title={'Actors'}
-                    />
+                    <SectionList data={mappedTrendingPeople} title={'Actors'} />
                 </View>
             </ScrollView>
         </>
