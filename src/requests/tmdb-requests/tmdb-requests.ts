@@ -1,7 +1,10 @@
+import { MediaType } from '../../types';
 import { tmdbClient } from '../../utils';
 
-export const getTrendingMovies = async () => {
-    const urlPath = '/trending/movie/day';
+export const getTrendingMediaByType = async (
+    mediaType: MediaType = MediaType.MOVIE
+) => {
+    const urlPath = `/trending/${mediaType}/day`;
     return tmdbClient.get(urlPath);
 };
 
