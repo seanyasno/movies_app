@@ -14,6 +14,7 @@ import {
 import { Appbar, Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
 
+import { CustomList } from '../../components';
 import { useMovieDetails, useMovieTrailers } from '../../hooks';
 import { MovieDetailsStackNavigationProp } from '../../types';
 import { tmdbClient } from '../../utils';
@@ -127,71 +128,26 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
 
                     <Text style={styles.overviewTitle}>Series Cast</Text>
 
-                    <ScrollView
-                        horizontal
-                        style={{
-                            columnGap: s(10),
+                    <CustomList
+                        data={cast.map(({ name, character, profile_path }) => ({
+                            imageUri: `https://image.tmdb.org/t/p/original${profile_path}`,
+                            title: name,
+                            description: character,
+                        }))}
+                        scrollProps={{ horizontal: true }}
+                        containerStyle={{
+                            alignItems: 'center',
+                            marginRight: s(10),
+                            rowGap: s(5),
                         }}
-                    >
-                        {cast.map(({ name, id, profile_path, character }) => (
-                            <View
-                                key={id}
-                                style={{
-                                    alignItems: 'center',
-                                    marginRight: s(10),
-                                    rowGap: s(5),
-                                    display: isEmpty(profile_path)
-                                        ? 'none'
-                                        : 'flex',
-                                }}
-                            >
-                                <View
-                                    style={{
-                                        elevation: 10,
-                                        borderRadius: s(50),
-                                        shadowColor: '#000',
-                                        shadowOffset: {
-                                            width: 0,
-                                            height: 2,
-                                        },
-                                        shadowOpacity: 0.25,
-                                        shadowRadius: 3.84,
-                                    }}
-                                >
-                                    <Image
-                                        source={{
-                                            uri: `https://image.tmdb.org/t/p/original${profile_path}`,
-                                            width: s(70),
-                                            height: s(70),
-                                        }}
-                                        style={{
-                                            borderRadius: s(50),
-                                        }}
-                                    />
-                                </View>
-                                <Text
-                                    style={{
-                                        color: '#253650',
-                                        maxWidth: s(80),
-                                        textAlign: 'center',
-                                        fontWeight: 'bold',
-                                    }}
-                                >
-                                    {name}
-                                </Text>
-                                <Text
-                                    style={{
-                                        color: '#25365047',
-                                        maxWidth: s(80),
-                                        textAlign: 'center',
-                                    }}
-                                >
-                                    {character}
-                                </Text>
-                            </View>
-                        ))}
-                    </ScrollView>
-                    {/*</View>*/}
+                        imageProps={{
+                            width: s(70),
+                            height: s(70),
+                        }}
+                        imageStyle={{
+                            borderRadius: s(50),
+                        }}
+                    />
                 </View>
             </ScrollView>
         </>
