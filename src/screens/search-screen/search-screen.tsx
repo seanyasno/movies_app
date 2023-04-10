@@ -8,7 +8,7 @@ import { s } from 'react-native-size-matters';
 
 import { useTrendingMediaByType } from '../../hooks';
 import { MediaType, RootStackParamList } from '../../types';
-import { SectionList } from './components';
+import { MemoizedSectionList } from './components';
 
 export const SearchScreen: React.FC = () => {
     const navigation =
@@ -95,14 +95,20 @@ export const SearchScreen: React.FC = () => {
                         rowGap: s(20),
                     }}
                 >
-                    <SectionList data={mappedTrendingMovies} title={'Movies'} />
+                    <MemoizedSectionList
+                        data={mappedTrendingMovies}
+                        title={'Movies'}
+                    />
 
-                    <SectionList
+                    <MemoizedSectionList
                         data={mappedTrendingTVShows}
                         title={'TV Shows'}
                     />
 
-                    <SectionList data={mappedTrendingPeople} title={'Actors'} />
+                    <MemoizedSectionList
+                        data={mappedTrendingPeople}
+                        title={'Actors'}
+                    />
                 </View>
             </ScrollView>
         </>

@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { isEqual } from 'lodash';
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
@@ -74,3 +75,13 @@ export const SectionList: React.FC<Props> = (props) => {
         </View>
     );
 };
+
+export const MemoizedSectionList = React.memo(
+    SectionList,
+    (previousProps, nextProps) => {
+        return (
+            isEqual(previousProps.data, nextProps.data) &&
+            isEqual(previousProps.title, nextProps.title)
+        );
+    }
+);

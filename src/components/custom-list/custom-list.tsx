@@ -2,9 +2,6 @@ import React from 'react';
 
 import { isUndefined } from 'lodash';
 import {
-    Image,
-    ImageSourcePropType,
-    ImageStyle,
     ImageURISource,
     ScrollView,
     StyleProp,
@@ -13,6 +10,7 @@ import {
     View,
     ViewStyle,
 } from 'react-native';
+import FastImage, { ImageStyle } from 'react-native-fast-image';
 import { Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
 
@@ -53,13 +51,10 @@ export const CustomList: React.FC<Props> = (props) => {
                         onPress={() => onPress?.(item)}
                     >
                         <View style={styles.imageContainer}>
-                            <Image
-                                source={{
-                                    uri: imageUri,
-                                    ...imageProps,
-                                }}
-                                resizeMode={'cover'}
-                                style={imageStyle}
+                            <FastImage
+                                style={[imageStyle, imageProps]}
+                                source={{ uri: imageUri }}
+                                resizeMode={FastImage.resizeMode.cover}
                             />
                         </View>
 

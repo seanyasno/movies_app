@@ -2,7 +2,8 @@ import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
 
@@ -63,14 +64,12 @@ export const MovieCard: React.FC<Props> = (props) => {
                         borderRadius: 36,
                     }}
                 >
-                    <Image
-                        source={{
-                            uri: imagePath,
-                            width: width,
-                            height: height,
-                        }}
-                        resizeMode={'cover'}
+                    <FastImage
+                        source={{ uri: imagePath }}
+                        resizeMode={FastImage.resizeMode.cover}
                         style={{
+                            width,
+                            height,
                             borderRadius: 36,
                         }}
                     />

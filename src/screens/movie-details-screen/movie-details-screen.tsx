@@ -1,9 +1,7 @@
 import React from 'react';
 
 import { useQuery } from '@tanstack/react-query';
-import { isEmpty } from 'lodash';
 import {
-    Image,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -11,6 +9,7 @@ import {
     useWindowDimensions,
     View,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { Appbar, Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
 
@@ -66,18 +65,17 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
 
             <ScrollView>
                 <View>
-                    <Image
-                        source={{
-                            uri: imagePath,
-                            width: width,
-                            height: width * (4 / 3),
-                        }}
-                        resizeMode={'cover'}
+                    <FastImage
+                        source={{ uri: imagePath }}
                         style={{
+                            width,
+                            height: width * (4 / 3),
                             borderBottomLeftRadius: s(30),
                             borderBottomRightRadius: s(30),
                         }}
+                        resizeMode={FastImage.resizeMode.cover}
                     />
+
                     <Appbar.BackAction
                         onPress={() => props.navigation.goBack()}
                         color={'#ffffff'}
