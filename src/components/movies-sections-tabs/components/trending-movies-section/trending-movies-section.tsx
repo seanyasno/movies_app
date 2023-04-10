@@ -3,11 +3,11 @@ import React from 'react';
 import { Text } from 'react-native-paper';
 
 import { MovieCardCarousel } from '../../..';
-import { useTrendingMovies } from '../../../../hooks';
+import { useTrendingMediaByType } from '../../../../hooks';
 
 export const TrendingMoviesSection: React.FC = () => {
     const { data: trendingMovies, isLoading: trendingMoviesLoading } =
-        useTrendingMovies();
+        useTrendingMediaByType();
 
     if (trendingMoviesLoading) {
         return <Text>Loading...</Text>;

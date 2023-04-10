@@ -35,7 +35,7 @@ export const SectionList: React.FC<Props> = (props) => {
     );
 
     return (
-        <>
+        <View>
             {title && (
                 <View>
                     <Text
@@ -71,6 +71,6 @@ export const SectionList: React.FC<Props> = (props) => {
                 }}
                 onPress={handlePress}
             />
-        </>
+        </View>
     );
 };

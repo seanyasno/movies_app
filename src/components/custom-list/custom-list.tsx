@@ -5,6 +5,7 @@ import {
     Image,
     ImageSourcePropType,
     ImageStyle,
+    ImageURISource,
     ScrollView,
     StyleProp,
     StyleSheet,
@@ -25,7 +26,7 @@ type Item = {
 type Props = {
     data: Item[];
     containerStyle?: StyleProp<ViewStyle>;
-    imageProps?: Omit<ImageSourcePropType, 'uri'>;
+    imageProps?: Omit<ImageURISource, 'uri'>;
     imageStyle?: StyleProp<ImageStyle>;
     scrollProps?: ScrollView['props'];
     onPress?: (item: Item) => void;
