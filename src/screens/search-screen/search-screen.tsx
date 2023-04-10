@@ -153,17 +153,20 @@ export const SearchScreen: React.FC = () => {
                         <MemoizedSectionList
                             data={mappedTrendingMovies as []}
                             title={'Movies'}
+                            mediaType={MediaType.MOVIE}
                         />
 
                         <MemoizedSectionList
                             data={mappedTrendingTVShows as []}
                             title={'TV Shows'}
+                            mediaType={MediaType.TV}
                         />
 
                         {mappedTrendingPeople?.length > 0 && (
                             <MemoizedSectionList
                                 data={mappedTrendingPeople as []}
                                 title={'Actors'}
+                                mediaType={MediaType.PERSON}
                             />
                         )}
                     </View>

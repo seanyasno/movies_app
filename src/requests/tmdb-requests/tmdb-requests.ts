@@ -23,7 +23,18 @@ export const getMovieDetails = async (movieId: number) => {
     return tmdbClient.get(urlPath);
 };
 
-export const getMovieTrailers = async (movieId: number) => {
-    const urlPath = `/movie/${movieId}/videos`;
+export const getMediaTrailers = async (
+    mediaId: number,
+    mediaType: MediaType
+) => {
+    const urlPath = `/${mediaType}/${mediaId}/videos`;
+    return tmdbClient.get(urlPath);
+};
+
+export const getMediaDetailsByType = async (
+    mediaId: number,
+    mediaType: MediaType
+) => {
+    const urlPath = `/${mediaType}/${mediaId}`;
     return tmdbClient.get(urlPath);
 };

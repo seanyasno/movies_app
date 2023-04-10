@@ -1,9 +1,12 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+import { MediaType } from './media-type';
+
 export type RootStackParamList = {
     Home: undefined;
     MovieDetails?: {
-        movieId: number;
+        mediaId: number;
+        mediaType: MediaType;
     };
     Search: undefined;
 };

@@ -7,7 +7,7 @@ import FastImage from 'react-native-fast-image';
 import { Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
 
-import { RootStackParamList } from '../../types';
+import { MediaType, RootStackParamList } from '../../types';
 import { UserRatingBar } from '../user-rating-bar/user-rating-bar';
 
 type Props = {
@@ -49,7 +49,8 @@ export const MovieCard: React.FC<Props> = (props) => {
             <TouchableOpacity
                 onPress={() =>
                     navigation.navigate('MovieDetails', {
-                        movieId: id,
+                        mediaId: id,
+                        mediaType: MediaType.MOVIE,
                     })
                 }
             >

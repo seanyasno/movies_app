@@ -8,7 +8,7 @@ import { Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
 
 import { CustomList } from '../../../../components';
-import { RootStackParamList } from '../../../../types';
+import { MediaType, RootStackParamList } from '../../../../types';
 
 type Props = {
     data: {
@@ -18,10 +18,11 @@ type Props = {
         description: string;
     }[];
     title?: string;
+    mediaType: MediaType;
 };
 
 export const SectionList: React.FC<Props> = (props) => {
-    const { data, title } = props;
+    const { data, title, mediaType } = props;
     const navigation =
         useNavigation<
             NativeStackNavigationProp<RootStackParamList, 'Search'>
@@ -30,7 +31,8 @@ export const SectionList: React.FC<Props> = (props) => {
     const handlePress = useCallback(
         (item) =>
             navigation.navigate('MovieDetails', {
-                movieId: item.id as number,
+                mediaId: item.id as number,
+                mediaType,
             }),
         [navigation]
     );
