@@ -64,12 +64,12 @@ export const SearchScreen: React.FC = () => {
     const filteredSearchedPeople = filterSearchDataByType(MediaType.PERSON);
 
     const mediaWithDefault = (media: [], defaultMedia: []) =>
-        isEmpty(media) ? defaultMedia : media;
+        isEmpty(media) && isEmpty(query) ? defaultMedia : media;
 
     const mappedTrendingMovies = mediaWithDefault(
         filteredSearchedMovies,
         trendingMovies
-    ).map(({ id, poster_path, title, release_date }) => ({
+    )?.map(({ id, poster_path, title, release_date }) => ({
         id,
         imageUri: `https://image.tmdb.org/t/p/original${poster_path}`,
         title,
@@ -81,7 +81,7 @@ export const SearchScreen: React.FC = () => {
     const mappedTrendingTVShows = mediaWithDefault(
         filteredSearchedTVShows,
         trendingTVShows
-    ).map(({ id, poster_path, name, first_air_date }) => ({
+    )?.map(({ id, poster_path, name, first_air_date }) => ({
         id,
         imageUri: `https://image.tmdb.org/t/p/original${poster_path}`,
         title: name,
@@ -94,7 +94,7 @@ export const SearchScreen: React.FC = () => {
         filteredSearchedPeople,
         trendingPeople
     )
-        .filter(({ profile_path }) => profile_path)
+        ?.filter(({ profile_path }) => profile_path)
         .map(({ id, profile_path, name }) => ({
             id,
             imageUri: `https://image.tmdb.org/t/p/original${profile_path}`,
@@ -150,17 +150,21 @@ export const SearchScreen: React.FC = () => {
                             rowGap: s(20),
                         }}
                     >
-                        <MemoizedSectionList
-                            data={mappedTrendingMovies as []}
-                            title={'Movies'}
-                            mediaType={MediaType.MOVIE}
-                        />
+                        {mappedTrendingMovies?.length > 0 && (
+                            <MemoizedSectionList
+                                data={mappedTrendingMovies as []}
+                                title={'Movies'}
+                                mediaType={MediaType.MOVIE}
+                            />
+                        )}
 
-                        <MemoizedSectionList
-                            data={mappedTrendingTVShows as []}
-                            title={'TV Shows'}
-                            mediaType={MediaType.TV}
-                        />
+                        {mappedTrendingTVShows?.length > 0 && (
+                            <MemoizedSectionList
+                                data={mappedTrendingTVShows as []}
+                                title={'TV Shows'}
+                                mediaType={MediaType.TV}
+                            />
+                        )}
 
                         {mappedTrendingPeople?.length > 0 && (
                             <MemoizedSectionList
