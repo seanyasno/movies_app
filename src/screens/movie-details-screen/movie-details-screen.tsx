@@ -200,7 +200,7 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
                                 description: character,
                             })
                         )}
-                        scrollProps={{ horizontal: true }}
+                        horizontal
                         containerStyle={{
                             alignItems: 'center',
                             marginRight: s(10),

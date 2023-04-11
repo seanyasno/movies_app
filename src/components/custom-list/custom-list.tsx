@@ -1,8 +1,10 @@
 import React from 'react';
 
+import { FlashList, FlashListProps } from '@shopify/flash-list';
 import { isUndefined } from 'lodash';
 import {
     ImageURISource,
+    ListRenderItem,
     ScrollView,
     StyleProp,
     StyleSheet,
@@ -26,8 +28,8 @@ type Props = {
     containerStyle?: StyleProp<ViewStyle>;
     imageProps?: Omit<ImageURISource, 'uri'>;
     imageStyle?: StyleProp<ImageStyle>;
-    scrollProps?: ScrollView['props'];
     onPress?: (item: Item) => void;
+    horizontal?: boolean;
 };
 
 export const CustomList: React.FC<Props> = (props) => {
@@ -36,16 +38,19 @@ export const CustomList: React.FC<Props> = (props) => {
         containerStyle,
         imageStyle,
         onPress,
+        horizontal,
     } = props;
 
     return (
-        <ScrollView {...props.scrollProps}>
-            {props.data.map((item, index) => {
+        <FlashList
+            data={props.data}
+            estimatedItemSize={20}
+            horizontal={horizontal}
+            renderItem={({ item }) => {
                 const { imageUri, title, description } = item;
 
                 return (
                     <TouchableOpacity
-                        key={index}
                         style={containerStyle}
                         disabled={isUndefined(onPress)}
                         onPress={() => onPress?.(item)}
@@ -62,8 +67,8 @@ export const CustomList: React.FC<Props> = (props) => {
                         <Text style={styles.description}>{description}</Text>
                     </TouchableOpacity>
                 );
-            })}
-        </ScrollView>
+            }}
+        />
     );
 };
 

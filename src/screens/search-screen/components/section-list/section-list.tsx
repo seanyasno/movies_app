@@ -34,7 +34,7 @@ export const SectionList: React.FC<Props> = (props) => {
                 mediaId: item.id as number,
                 mediaType,
             }),
-        [navigation]
+        [mediaType, navigation]
     );
 
     return (
@@ -55,9 +55,7 @@ export const SectionList: React.FC<Props> = (props) => {
 
             <CustomList
                 data={data}
-                scrollProps={{
-                    horizontal: true,
-                }}
+                horizontal
                 imageProps={{
                     width: s(120),
                     height: s(154),
