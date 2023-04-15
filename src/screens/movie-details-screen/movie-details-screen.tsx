@@ -10,7 +10,7 @@ import {
     View,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { Appbar, Text } from 'react-native-paper';
+import { ActivityIndicator, Appbar, Text } from 'react-native-paper';
 import { s } from 'react-native-size-matters';
 
 import { CustomList } from '../../components';
@@ -104,8 +104,13 @@ export const MovieDetailsScreen: React.FC<MovieDetailsStackNavigationProp> = (
 
     if (loadingDetails || loadingTrailer || isLoadingCast) {
         return (
-            <SafeAreaView>
-                <Text>Loading...</Text>
+            <SafeAreaView
+                style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                }}
+            >
+                <ActivityIndicator />
             </SafeAreaView>
         );
     }

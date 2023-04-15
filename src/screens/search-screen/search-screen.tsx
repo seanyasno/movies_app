@@ -52,7 +52,16 @@ export const SearchScreen: React.FC = () => {
         loadingTrendingTVShows ||
         loadingTrendingPeople
     ) {
-        return <Text>Loading...</Text>;
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                }}
+            >
+                <ActivityIndicator />
+            </View>
+        );
     }
 
     const filterSearchDataByType = (type: MediaType) => {
@@ -139,11 +148,18 @@ export const SearchScreen: React.FC = () => {
                 />
 
                 {loadingSearchedData ? (
-                    <ActivityIndicator
+                    <View
                         style={{
-                            marginTop: s(20),
+                            flex: 1,
+                            justifyContent: 'center',
                         }}
-                    />
+                    >
+                        <ActivityIndicator
+                            style={{
+                                marginTop: s(20),
+                            }}
+                        />
+                    </View>
                 ) : (
                     <View
                         style={{

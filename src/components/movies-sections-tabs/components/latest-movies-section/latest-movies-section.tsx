@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 
 import { MovieCardCarousel } from '../../..';
 import { useLatestMovies } from '../../../../hooks';
@@ -10,7 +10,7 @@ export const LatestMoviesSection: React.FC = () => {
         useLatestMovies();
 
     if (latestMoviesLoading) {
-        return <Text>Loading...</Text>;
+        return <ActivityIndicator />;
     }
 
     return <MovieCardCarousel movies={latestMovies} />;

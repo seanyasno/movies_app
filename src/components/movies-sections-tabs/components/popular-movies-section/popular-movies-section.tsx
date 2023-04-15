@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 
 import { MovieCardCarousel } from '../../..';
 import { usePopularMovies } from '../../../../hooks';
@@ -10,7 +10,7 @@ export const PopularMoviesSection: React.FC = () => {
         usePopularMovies();
 
     if (popularMoviesLoading) {
-        return <Text>Loading...</Text>;
+        return <ActivityIndicator />;
     }
 
     return <MovieCardCarousel movies={popularMovies} />;
